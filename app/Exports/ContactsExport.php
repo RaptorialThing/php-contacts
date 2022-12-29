@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Contact;
+use App\Models\Contact;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\Exportable;

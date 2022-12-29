@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Exports\ContactsExport;
 use Maatwebsite\Excel\Facades\Excel;
