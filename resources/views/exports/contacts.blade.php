@@ -1,16 +1,25 @@
 <table>
     <thead>        
     <tr>
+        <th>id</th>      
         <th>Фамилия</th>
         <th>Имя</th>
         <th>Отчество</th>
         <th>email</th>
         <th>телефон</th>
+        <th>теги</th>
     </tr>
     </thead>
     <tbody>
     @foreach($contacts as $contact)
     <tr>
+        <td>
+            @empty($contact->id)
+   
+            @else
+                {{$contact->id}}
+            @endempty
+            </td>
         <td>
             @empty($contact->lastname)
    
@@ -46,6 +55,16 @@
             {{$contact->phone}}
         @endempty
     </td>
+    <td>
+    @foreach($contact->tags as $tag)
+            @empty($tag->text)
+   
+            @else
+                {{$tag->text}}; 
+            @endempty
+    @endforeach
+    </td>
+
     </tr>
     @endforeach
     </tbody>

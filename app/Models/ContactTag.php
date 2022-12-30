@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactTag extends Model
 {
-    protected $table = 'tags_contacts';
+
+    protected $table = "tags_contacts";
 
     protected $fillable = [
         'tag_id',
@@ -15,11 +16,11 @@ class ContactTag extends Model
 
     public function tag()
     {
-        return $this->belongsTo(Tag::class,'tag_id','id');
+        //return $this->belongsTo(Tag::class,'tag_id','id');
     }
 
     public function contact()
     {
-        return $this->belongsTo(Contact::class,'contact_id','id');
+        //return $this->belongsTo(Contact::class,'contact_id','id');
     }
 }

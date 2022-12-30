@@ -5,8 +5,8 @@
             <div class="col-12 pt-2">
                <div class="row">
                     <div class="col-8">
-                        <h1 class="display-one">Our Contacts!</h1>
-                        <p>Enjoy reading our posts. Click on a contact to read!</p>
+                        <h1 class="display-one">Contacts</h1>
+                        <p>all contacts</p>
                     </div>
                     <div class="col-4">
                         <p>Create new contact</p>
@@ -14,7 +14,15 @@
                     </div>
                </div>
                 <ul>
-                    <li><a href="/contacts/export">Скачать</a></li>
+                    <li><a href="/contacts/export">Экспорт</a></li>
+                    <li>
+                        <form action="/contacts/import" method="POST" enctype="multipart/form-data">
+                          <label for="import_contact">Импорт</label>
+                          <input type="file" id="import_contact" name="contacts"><br/>
+                          <input type="submit">
+                        
+                        </form>
+                    </li>
                 </ul>
             @forelse($contacts as $contact)
                 <ul>
@@ -25,6 +33,5 @@
             @endforelse
             </div>
         </div>
-        {{ $contacts->links() }}
     </div>
 @endsection

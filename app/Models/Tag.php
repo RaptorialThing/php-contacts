@@ -7,14 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
 
-    protected $table = 'tags';
-
     protected $fillable = [
         'text',
+        'color',
     ];
 
     public function contacts()
     {
-        return $this->belongsToMany(Contact::class,'contacts_users');
+        return $this->belongsToMany(Contact::class,'tags_contacts','tag_id','contact_id');
     }
 }

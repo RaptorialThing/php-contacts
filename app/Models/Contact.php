@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
 
-    protected $table = 'contacts';
-
     protected $fillable = [
         'firstname',
         'lastname',
@@ -19,6 +17,6 @@ class Contact extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class,'contacts_tags');
+        return $this->belongsToMany(Tag::class,'tags_contacts','contact_id','tag_id');
     }
 }

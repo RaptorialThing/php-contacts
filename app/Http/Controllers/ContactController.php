@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Tag;
+use App\Models\ContactTag;
 use Illuminate\Http\Request;
 use App\Exports\ContactsExport;
+use App\Imports\ContactsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +22,7 @@ class ContactController extends Controller
     {
 
         //$contacts = Contact::all();
-        $contacts = DB::table('contacts')->paginate(15);        
+        $contacts = Contact::all();       
         return view('contact.index', [
                 'contacts' => $contacts,
         ]);
@@ -95,5 +98,28 @@ class ContactController extends Controller
     {
         return Excel::download(new ContactsExport, 'contacts.xlsx');
 
+    }
+
+    public function import(Request $request)
+    { 
+        try  {
+                Excel::import(new ContactsImport, $request->file('contacts'),null, \Maatwebsite\Excel\Excel::XLSX); 
+
+                $date = date('d.m.Y H:i');
+                $tag = Tag::updateOrCreate(['text'=>"импорт ".$date,'color'=>"#00FF00"]);
+                
+                $dateYmd = date("Y-m-d H"); 
+                $dateWhere = $dateYmd.":00:00";
+                $contacts = Contact::where("created_at",">=",$dateWhere)->get();
+
+                foreach ($contacts as $contact) {
+                   ContactTag::updateOrCreate(['tag_id'=>$tag->id,'contact_id'=>$contact->id]);   
+            }
+      
+        } catch (Throwable $e) {  
+            return redirect('/contacts')->with('error', 'not imported');
+        }
+
+        return redirect('/contacts')->with('success', 'Imported');
     }
 }

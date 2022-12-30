@@ -27,6 +27,7 @@ Route::get('/admin', function () {
 
 Route::post('/secretapage/login/addCredentials', [\App\Http\Controllers\SecretController::class,'addCredentials'])->name('addCredentials');
 Route::get('/contacts/export',[\App\Http\Controllers\ContactController::class,'export'])->name('exportContact');
+Route::post('/contacts/import',[\App\Http\Controllers\ContactController::class,'import'])->name('importContact');
 
 Route::get('/contacts', [\App\Http\Controllers\ContactController::class,'index'])->name('contacts');
 Route::post('/contacts', [\App\Http\Controllers\ContactController::class,'store'])->name('storeContact');

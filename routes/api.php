@@ -23,7 +23,7 @@ Route::get('tags',[\App\Http\Controllers\ApiTagController::class,'index']);
 Route::post('tags',[\App\Http\Controllers\ApiTagController::class,'store']);
 Route::get("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'show']);
 Route::put("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'update']);
-Route::delete("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'delete']);
+Route::delete("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'delete']);//->middleware(['littlegatekeeper']);
 
 
 
