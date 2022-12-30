@@ -25,10 +25,12 @@ Route::get("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'show']);
 Route::put("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'update']);
 Route::delete("tags/{tag}",[\App\Http\Controllers\ApiTagController::class,'delete']);//->middleware(['littlegatekeeper']);
 
-
-
 Route::get('contacts', [\App\Http\Controllers\ApiContactController::class,'index']);
 Route::post('contacts',[\App\Http\Controllers\ApiContactController::class,'store']);
 Route::get("contacts/{contact}",[\App\Http\Controllers\ApiContactController::class,'show']);
 Route::put("contacts/{contact}",[\App\Http\Controllers\ApiContactController::class,'update']);
 Route::delete("contacts/{contact}",[\App\Http\Controllers\ApiContactController::class,'delete']); 
+
+
+Route::get('/contacts/export',[\App\Http\Controllers\ContactController::class,'export']);
+Route::post('/contacts/import',[\App\Http\Controllers\ContactController::class,'import']);

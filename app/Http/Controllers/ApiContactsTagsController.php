@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
+use App\Models\ContactTag;
 use Illuminate\Http\Request;
 
-class ApiContactController extends Controller
+class ApiContactsTagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ApiContactController extends Controller
      */
     public function index()
     {
-        return Contact::with('tags')->get();
+        //
     }
 
     /**
@@ -35,28 +35,27 @@ class ApiContactController extends Controller
      */
     public function store(Request $request)
     {
-         $contact = Contact::create($request->all());
-         return response()->json($contact, 201);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\ContactTag  $contactTag
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(ContactTag $contactTag)
     {
-        return Contact::with('tags')->find($contact->id);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\ContactTag  $contactTag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(ContactTag $contactTag)
     {
         //
     }
@@ -65,35 +64,22 @@ class ApiContactController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\ContactTag  $contactTag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, ContactTag $contactTag)
     {
-
-        $contact = Contact::findOrFail($contact->id);
-        $contact->update($request->all());
-
-        return response()->json($contact, 200);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\ContactTag  $contactTag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy(ContactTag $contactTag)
     {
         //
     }
-
-    public function delete(Contact $contact)
-    {
-        $tag = Contact::findOrFail($contact->id);
-        $tag->delete();
-
-        return response()->json(null, 204);
-    }
-
 }

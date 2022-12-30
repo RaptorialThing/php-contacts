@@ -11,10 +11,21 @@ use Maatwebsite\Excel\Events\BeforeImport;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class ContactsImport implements ToModel, WithEvents
+class ContactsImport implements ToModel, WithEvents, WithStartRow
 
 {
+
+
+    /**
+     * @return int
+     */
+    public function startRow(): int
+    {
+        return 2;
+    }
 
     /**
     * @param array $row
@@ -24,11 +35,15 @@ class ContactsImport implements ToModel, WithEvents
     public function model(array $row)
     {
 
+        HeadingRowFormatter::extend('custom', function($value, $key) {
+            return strtolowwer($value); 
+        });
+
         return new Contact([
-             'lastname'     => $row[0],
-             'firstname'     => $row[1],
-             'patrony'     => $row[2],
-             'lastname'     => $row[3],
+             'id'           => $row[0],
+             'lastname'     => $row[1],
+             'firstname'     => $row[2],
+             'patrony'     => $row[3],
              'email'     => $row[4],
              'phone'     => $row[5],
         ]);

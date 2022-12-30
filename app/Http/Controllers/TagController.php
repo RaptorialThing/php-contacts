@@ -82,4 +82,12 @@ class TagController extends Controller
     {
         //
     }
+
+    public function deleteMiddleware(Tag $tag)
+    {
+        $tag = Tag::findOrFail($tag->id);
+        $tag->delete();
+
+        return redirect("/");
+    }
 }

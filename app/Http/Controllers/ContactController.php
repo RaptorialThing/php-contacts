@@ -10,6 +10,7 @@ use App\Exports\ContactsExport;
 use App\Imports\ContactsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class ContactController extends Controller
 {
@@ -103,7 +104,7 @@ class ContactController extends Controller
     public function import(Request $request)
     { 
         try  {
-                Excel::import(new ContactsImport, $request->file('contacts'),null, \Maatwebsite\Excel\Excel::XLSX); 
+                $file = Excel::import(new ContactsImport, $request->file('contacts'),null, \Maatwebsite\Excel\Excel::XLSX); 
 
                 $date = date('d.m.Y H:i');
                 $tag = Tag::updateOrCreate(['text'=>"импорт ".$date,'color'=>"#00FF00"]);
@@ -115,6 +116,10 @@ class ContactController extends Controller
                 foreach ($contacts as $contact) {
                    ContactTag::updateOrCreate(['tag_id'=>$tag->id,'contact_id'=>$contact->id]);   
             }
+
+                    $response = Response::make($file, 200);
+                    $response->header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                    return $response;
       
         } catch (Throwable $e) {  
             return redirect('/contacts')->with('error', 'not imported');

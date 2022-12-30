@@ -15,6 +15,8 @@ class Contact extends Model
         'phone',
     ];
 
+    protected $hidden = ['pivot'];
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class,'tags_contacts','contact_id','tag_id');

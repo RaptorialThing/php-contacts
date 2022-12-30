@@ -20,7 +20,7 @@
                           <label for="import_contact">Импорт</label>
                           <input type="file" id="import_contact" name="contacts"><br/>
                           <input type="submit">
-                        
+                        @csrf
                         </form>
                     </li>
                 </ul>

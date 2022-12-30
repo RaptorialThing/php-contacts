@@ -14,7 +14,7 @@ class ApiTagController extends Controller
      */
     public function index()
     {
-        return Tag::all();
+        return Tag::orderBy('updated_at','desc')->get();
     }
 
     /**
@@ -97,4 +97,5 @@ class ApiTagController extends Controller
 
         return response()->json(null, 204);
     }
+
 }
